@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { ConferenceData } from '../../providers/conference-data';
+import { ConferenceService } from '../../providers/conference/conference-service';
 
 @IonicPage({
   segment: 'speaker/:speakerId'
@@ -13,11 +13,14 @@ import { ConferenceData } from '../../providers/conference-data';
 export class SpeakerDetailPage {
   speaker: any;
 
-  constructor(public dataProvider: ConferenceData, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public confService: ConferenceService,
+    public navCtrl: NavController,
+    public navParams: NavParams) {
   }
 
   ionViewWillEnter() {
-    this.dataProvider.load().subscribe((data: any) => {
+    this.confService.load().subscribe((data: any) => {
       if (data && data.speakers) {
         for (const speaker of data.speakers) {
           if (speaker && speaker.id === this.navParams.data.speakerId) {

@@ -8,7 +8,7 @@ import { AlertController, App, FabContainer, ItemSliding, List, ModalController,
 */
 // import moment from 'moment';
 
-import { ConferenceData } from '../../providers/conference-data';
+import { ConferenceService } from '../../providers/conference/conference-service';
 import { UserData } from '../../providers/user-data';
 
 import { SessionDetailPage } from '../session-detail/session-detail';
@@ -41,7 +41,7 @@ export class SchedulePage {
     public modalCtrl: ModalController,
     public navCtrl: NavController,
     public toastCtrl: ToastController,
-    public confData: ConferenceData,
+    public confService: ConferenceService,
     public user: UserData,
   ) {}
 
@@ -54,7 +54,7 @@ export class SchedulePage {
     // Close any open sliding items when the schedule updates
     this.scheduleList && this.scheduleList.closeSlidingItems();
 
-    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
+    this.confService.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
       this.shownSessions = data.shownSessions;
       this.groups = data.groups;
     });
@@ -149,7 +149,7 @@ export class SchedulePage {
   }
 
   doRefresh(refresher: Refresher) {
-    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
+    this.confService.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
       this.shownSessions = data.shownSessions;
       this.groups = data.groups;
 

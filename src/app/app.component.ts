@@ -16,7 +16,8 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { SupportPage } from '../pages/support/support';
 
-import { ConferenceData } from '../providers/conference-data';
+import { ConferenceService } from '../providers/conference/conference-service';
+import {} from '../providers/conference/conference-service';
 import { UserData } from '../providers/user-data';
 
 export interface PageInterface {
@@ -64,7 +65,7 @@ export class ConferenceApp {
     public userData: UserData,
     public menu: MenuController,
     public platform: Platform,
-    public confData: ConferenceData,
+    public confService: ConferenceService,
     public storage: Storage,
     public splashScreen: SplashScreen
   ) {
@@ -81,7 +82,7 @@ export class ConferenceApp {
       });
 
     // load the conference data
-    confData.load();
+    confService.load();
 
     // decide which menu items should be hidden by current login status stored in local storage
     this.userData.hasLoggedIn().then((hasLoggedIn) => {

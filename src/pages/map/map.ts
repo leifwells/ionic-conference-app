@@ -1,26 +1,24 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-
-import { ConferenceData } from '../../providers/conference-data';
-
+import { ConferenceService } from '../../providers/conference/conference-service';
 import { Platform } from 'ionic-angular';
 
-
 declare var google: any;
-
 
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html'
 })
 export class MapPage {
-
   @ViewChild('mapCanvas') mapElement: ElementRef;
-  constructor(public confData: ConferenceData, public platform: Platform) {
-  }
+
+  constructor(
+    public confService: ConferenceService,
+    public platform: Platform
+  ) {}
 
   ionViewDidLoad() {
 
-      this.confData.getMap().subscribe((mapData: any) => {
+      this.confService.getMap().subscribe((mapData: any) => {
         let mapEle = this.mapElement.nativeElement;
 
         let map = new google.maps.Map(mapEle, {

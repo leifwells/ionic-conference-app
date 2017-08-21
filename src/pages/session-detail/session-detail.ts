@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
 
-import { ConferenceData } from '../../providers/conference-data';
+import { ConferenceService } from '../../providers/conference/conference-service';
 
 @IonicPage({
   segment: 'session/:sessionId'
@@ -14,12 +14,12 @@ export class SessionDetailPage {
   session: any;
 
   constructor(
-    public dataProvider: ConferenceData,
+    public confService: ConferenceService,
     public navParams: NavParams
   ) {}
 
   ionViewWillEnter() {
-    this.dataProvider.load().subscribe((data: any) => {
+    this.confService.load().subscribe((data: any) => {
       if (
         data &&
         data.schedule &&
