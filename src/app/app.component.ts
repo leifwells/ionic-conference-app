@@ -17,7 +17,6 @@ import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { SupportPage } from '../pages/support/support';
 
 import { ConferenceService } from '../providers/conference/conference-service';
-import {} from '../providers/conference/conference-service';
 import { UserData } from '../providers/user-data';
 
 export interface PageInterface {
